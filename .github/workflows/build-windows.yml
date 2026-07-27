@@ -1,5 +1,5 @@
       - name: Build and Package Electron App
-        # Uses npx to execute electron-builder directly without needing a script entry
-        run: npx electron-builder build --win 
+        # Wrapping the command in single quotes fixes the sequence syntax error
+        run: 'npm run build -- --publish never'
         env:
           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
