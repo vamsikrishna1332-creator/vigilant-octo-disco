@@ -1,4 +1,20 @@
-name: Build and Package Electron 
-run: npm run build -- --publish never
-env:
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+{
+  "name": "launchdesk",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win" 
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.launchdesk.app",
+    "productName": "launchdesk",
+    "win": {
+      "target": ["nsis"]
+    }
+  }
+}
