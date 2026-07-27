@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Allows you to trigger the build manually
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22 # Updated to the latest stable LTS version
           cache: 'npm'
 
       - name: Install Dependencies
@@ -25,6 +25,9 @@ jobs:
 
       - name: Build and Package Electron App
         run: npm run build
+        env:
+          # Bypasses the Node 20 deprecation block if any underlying action requires it
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true 
 
       - name: Upload Installer Exe
         uses: actions/upload-artifact@v4
