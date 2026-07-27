@@ -1,36 +1,4 @@
-name: Build Electron Windows Installer
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          # Removed the cache option to prevent looking for a lock file
-
-      - name: Install Dependencies
-        # Changed 'npm ci' to 'npm install' which creates the missing dependencies dynamically
-        run: npm install 
-
-      - name: Build and Package Electron App
-        run: npm run build
-        env:
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-
-      - name: Upload Installer Exe
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-installer
-          path: dist/*.exe
+name: Build and Package Electron 
+run: npm run build -- --publish never
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
