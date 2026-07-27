@@ -1,0 +1,42 @@
+{
+  "name": "launchdesk",
+  "version": "1.0.0",
+  "description": "LaunchDesk — premium productivity launcher",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.launchdesk.app",
+    "productName": "LaunchDesk",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "app/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "app/favicon.svg"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "app/favicon.svg"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}
