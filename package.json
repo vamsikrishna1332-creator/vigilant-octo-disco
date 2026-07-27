@@ -1,13 +1,15 @@
 {
   "name": "launchdesk",
   "version": "1.0.0",
+  "description": "Launchdesk desktop application",
   "main": "main.js",
   "scripts": {
-  "start": "electron .",
-  "build": "electron-builder build --win --publish never"
-}
-
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "electron": "^30.0.0",
     "electron-builder": "^24.13.3"
@@ -16,7 +18,18 @@
     "appId": "com.launchdesk.app",
     "productName": "launchdesk",
     "win": {
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "directories": {
+      "output": "dist"
     }
   }
 }
