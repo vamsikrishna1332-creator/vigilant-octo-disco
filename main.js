@@ -218,7 +218,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'app', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'App', 'index.html'));
 
   // Make the top bar draggable without blocking child interactions
   mainWindow.webContents.on('did-finish-load', () => {
