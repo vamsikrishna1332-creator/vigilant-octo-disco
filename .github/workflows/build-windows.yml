@@ -17,17 +17,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22 # Updated to the latest stable LTS version
-          cache: 'npm'
+          node-version: 22
+          # Removed the cache option to prevent looking for a lock file
 
       - name: Install Dependencies
-        run: npm ci
+        # Changed 'npm ci' to 'npm install' which creates the missing dependencies dynamically
+        run: npm install 
 
       - name: Build and Package Electron App
         run: npm run build
         env:
-          # Bypasses the Node 20 deprecation block if any underlying action requires it
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true 
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
       - name: Upload Installer Exe
         uses: actions/upload-artifact@v4
