@@ -1,5 +1,4 @@
-name: Build Electron Windows Installer
-
+name: Build Electron Android Installer
 on:
   push:
     branches:
@@ -8,8 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
@@ -17,19 +15,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build and Package Electron App
+      - name: Build and Package Android App
         run: npm run build
         env:
           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
           ELECTRON_BUILDER_ALLOW_EMPTY_GH_TOKEN: true
 
-      - name: Upload Installer Exe
+      - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: windows-installer
-          path: dist/*.exe
+          name: android-apk
+          path: dist/*.apk
