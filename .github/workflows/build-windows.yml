@@ -1,39 +1,32 @@
-name: Build Electron Android Installer
+name: Build Windows App
+
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - 'v2.0.0'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-windows:
+    runs-on: windows-latest
+
     steps:
-      - name: Checkout Source Code
+      - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
+          cache: 'npm'
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build and Package Android App
-        run: npm run build
-        env:
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-          ELECTRON_BUILDER_ALLOW_EMPTY_GH_TOKEN: true
-
-      - name: Upload Android APK
-        uses: actions/upload-artifact@v4
+      - name: Build and release Electron app
+        uses: samuelmeuli/action-electron-builder@v5
         with:
-          name: android-apk
-          path: dist/*.apk
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release: true
+        env:
+          PACKAGE_NAME: launchdesk
+          PACKAGE_VERSION: "2.0.0"
