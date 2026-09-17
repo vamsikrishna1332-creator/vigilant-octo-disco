@@ -27,3 +27,6 @@ NOTES
 - All your data (shortcuts, schedules, quotes, settings) is stored
   in your OS's local app-data folder — it persists across sessions.
 - No internet connection required after first launch.
+- Run 'powershell -NoProfile -Command "Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name Wallpaper -Value "C:\Users\[Your username given by windows]OneDrive\Pictures\image name.jpg'; rundll32.exe user32.dll,UpdatePerUserSystemParameters" Everytime to set the wallpaper in the app (I'll Try To improve it later)
+
+[![Follow Me On Instagram](https://shields.io)](https://instagram.com/vamsi.krishna1332)
