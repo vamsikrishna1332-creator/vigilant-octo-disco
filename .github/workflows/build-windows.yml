@@ -1,4 +1,4 @@
-name: Build Windows App
+name: Build Windows App using Wine compatibility layer
 
 on:
   push:
